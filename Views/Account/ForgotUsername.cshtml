@@ -1,0 +1,47 @@
+﻿@model Project3_DatingSite.Models.ForgotUsernameViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Forgot Username";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Username</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <hr />
+
+        <form asp-controller="Account" asp-action="ForgotUsername" method="POST">
+            <div class="form-group">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Find Username" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div>@ViewData["Message"]</div>
+
+        @if (Model.RecoveredUsername != null && Model.RecoveredUsername != "")
+        {
+            <div style="margin-top:15px;">
+                <strong>Your username is:</strong> @Model.RecoveredUsername
+            </div>
+        }
+
+        <br />
+        <a asp-controller="Account" asp-action="Login">Back to Login</a>
+    </div>
+</body>
+</html>

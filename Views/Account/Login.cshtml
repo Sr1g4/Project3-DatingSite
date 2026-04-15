@@ -1,0 +1,218 @@
+﻿@model Project3_DatingSite.Models.LoginViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    Layout = null;
+    ViewData["Title"] = "MatchRight - Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+        background: linear-gradient(135deg, #f5e6d3, #e8d5b7);
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .page-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 15px;
+        }
+
+        .login-card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        max-width: 950px;
+        width: 100%;
+        }
+
+        .brand-side {
+        background: linear-gradient(135deg, #1e90ff, #0066cc);
+        color: white;
+        padding: 50px 40px;
+        min-height: 540px;
+        }
+
+        .brand-title {
+        font-size: 42px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        }
+
+        .brand-subtitle {
+        font-size: 17px;
+        margin-top: 20px;
+        line-height: 1.6;
+        }
+
+        .brand-icon {
+        font-size: 65px;
+        margin-bottom: 20px;
+        }
+
+        .form-side {
+        padding: 45px 40px;
+        background-color: #fffdf8;
+        min-height: 540px;
+        }
+
+        .form-title {
+        font-size: 30px;
+        font-weight: bold;
+        color: #0066cc;
+        margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+        color: #666;
+        margin-bottom: 25px;
+        }
+
+        .form-control {
+        height: 46px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        }
+
+        .form-control:focus {
+        border-color: #1e90ff;
+        box-shadow: 0 0 6px rgba(30, 144, 255, 0.3);
+        }
+
+        .btn-login {
+        background-color: #1e90ff;
+        border-color: #1e90ff;
+        color: white;
+        width: 100%;
+        height: 46px;
+        border-radius: 10px;
+        font-weight: bold;
+        }
+
+        .btn-login:hover {
+        background-color: #0066cc;
+        border-color: #0066cc;
+        }
+
+        .link-group {
+        margin-top: 20px;
+        }
+
+        .link-group a {
+        display: block;
+        margin-bottom: 10px;
+        color: #0066cc;
+        font-weight: 600;
+        text-decoration: none;
+        }
+
+        .link-group a:hover {
+        text-decoration: underline;
+        }
+
+        .message-box {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 6px;
+        background-color: #f5e6d3;
+        color: #8b5e3c;
+        font-weight: 600;
+        }
+
+        .feature-list {
+        margin-top: 30px;
+        }
+
+        .feature-list li {
+        margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="login-card">
+            <div class="row" style="margin:0;">
+                <div class="col-sm-5 brand-side">
+                    <<div style="text-align:center; margin-bottom:25px;">
+                        <img src="~/images/matchright-logo.png"
+                             alt="MatchRight Logo"
+                             style="max-width: 240px; width: 100%;" />
+                    </div>
+
+                    <h3>Find your match with confidence. and with MatchRight ;)</h3>
+
+                    <p class="brand-subtitle">
+                        Discover meaningful connections through shared values, lifestyle, and goals.
+                        Your next relationship starts here.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li>Browse serious and genuine profiles</li>
+                        <li>Connect based on values and compatibility</li>
+                        <li>Build a profile that reflects who you really are</li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-7 form-side">
+                    <div class="form-title">Welcome Back</div>
+                    <div class="form-subtitle">Log in to continue your MatchRight experience.</div>
+
+                    <form asp-controller="Account" asp-action="Login" method="POST">
+                        <div class="form-group">
+                            <label asp-for="Username"></label>
+                            <input asp-for="Username" class="form-control" placeholder="Enter your username" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                        </div>
+
+                        <div class="checkbox remember-row">
+                            <label>
+                                <input asp-for="RememberMe" type="checkbox" />
+                                Remember Username
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn btn-login" />
+                        </div>
+                    </form>
+
+                    @if (ViewData["Message"] != null)
+                    {
+                        <div class="message-box">
+                            @ViewData["Message"]
+                        </div>
+                    }
+
+                    <div class="link-group">
+                        <a asp-controller="Account" asp-action="Register">Create Account</a>
+                        <a asp-controller="Account" asp-action="ForgotUsername">Forgot Username?</a>
+                        <a asp-controller="Account" asp-action="ForgotPassword">Forgot Password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
