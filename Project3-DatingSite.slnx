@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="../DatingSiteLibrary/DatingSiteLibrary.csproj" Id="62628bc6-99c7-47ed-9944-f2308289fe30" />
   <Project Path="../ProfilesAPI/DatingProfilesAPI.csproj" Id="3daea0bb-b585-4930-958a-e3854dc279fb" />
-  <Project Path="../Utilities/Utilities.csproj" Id="6ee996f7-5cff-405b-b50c-e92e937db3e8" />
   <Project Path="Project3-DatingSite.csproj" />
+  <Project Path="Utilities/Utilities.csproj" Id="6ee996f7-5cff-405b-b50c-e92e937db3e8" />
 </Solution>
