@@ -136,10 +136,11 @@
                     }
 
                     <a asp-controller="Search" asp-action="Index">Browse Profiles</a>
-                </div>
-
-                <div class="logout-link">
-                    <a asp-controller="Account" asp-action="Logout">Logout</a>
+                    <a asp-controller="Likes" asp-action="Sent">My Likes</a>
+                    <a asp-controller="Likes" asp-action="Received">People Who Liked Me</a>
+                    <a asp-controller="Matches" asp-action="Index">My Matches</a>
+                    <a asp-controller="DateRequests" asp-action="Index">Date Requests</a>
+                    <a asp-controller="DatePlans" asp-action="Index">Date Plans</a>
                 </div>
             </div>
         </div>
