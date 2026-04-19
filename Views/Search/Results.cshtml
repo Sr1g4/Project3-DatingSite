@@ -1,0 +1,193 @@
+﻿@model List<Project3_DatingSite.Models.SearchResultViewModel>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = null;
+    ViewData["Title"] = "MatchRight - Search Results";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <style>
+            body {
+                background: linear-gradient(135deg, #f5e6d3, #e8d5b7);
+                min-height: 100vh;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .page-wrapper {
+                padding: 30px 15px;
+            }
+
+            .page-card {
+                max-width: 1150px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+                overflow: hidden;
+            }
+
+            .header-side {
+                background: linear-gradient(135deg, #1e90ff, #0066cc);
+                color: white;
+                padding: 35px 30px;
+                text-align: center;
+            }
+
+            .content-side {
+                padding: 30px;
+                background-color: #fffdf8;
+            }
+
+            .result-card {
+                background: white;
+                border: 1px solid #e6e6e6;
+                border-radius: 16px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                overflow: hidden;
+                margin-bottom: 25px;
+            }
+
+            .result-photo {
+                width: 100%;
+                height: 260px;
+                object-fit: cover;
+                background-color: #f2f2f2;
+            }
+
+            .result-body {
+                padding: 20px;
+            }
+
+            .result-name {
+                font-size: 24px;
+                font-weight: bold;
+                color: #0066cc;
+                margin-bottom: 10px;
+            }
+
+            .result-info {
+                margin-bottom: 8px;
+                color: #444;
+            }
+
+            .result-description {
+                margin-top: 12px;
+                color: #666;
+            }
+
+            .btn-main {
+                background-color: #1e90ff;
+                border-color: #1e90ff;
+                color: white;
+                border-radius: 10px;
+                font-weight: bold;
+                margin-top: 15px;
+            }
+
+                .btn-main:hover {
+                    background-color: #0066cc;
+                    border-color: #0066cc;
+                    color: white;
+                }
+
+            .no-results {
+                text-align: center;
+                padding: 40px 20px;
+                color: #666;
+                font-size: 18px;
+            }
+
+            .top-links {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+                .top-links a {
+                    color: #0066cc;
+                    font-weight: bold;
+                    text-decoration: none;
+                    margin: 0 10px;
+                }
+
+                    .top-links a:hover {
+                        text-decoration: underline;
+                    }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="page-card">
+            <div class="header-side">
+                <div style="margin-bottom: 15px;">
+                    <img src="~/images/matchright-logo.png"
+                         alt="MatchRight Logo"
+                         style="max-width: 220px; width: 100%;" />
+                </div>
+
+                <h2>Search Results</h2>
+                <p>Explore potential matches based on your selected filters.</p>
+            </div>
+
+            <div class="content-side">
+                @if (Model == null || Model.Count == 0)
+                {
+                    <div class="no-results">
+                        No profiles matched your search.
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <div class="col-sm-6">
+                                <div class="result-card">
+                                    <img src="@Model[i].PhotoURL" alt="Profile Photo" class="result-photo" />
+
+                                    <div class="result-body">
+                                        <div class="result-name">
+                                            @Model[i].FirstName @Model[i].LastName
+                                        </div>
+
+                                        <div class="result-info"><strong>Location:</strong> @Model[i].City, @Model[i].State</div>
+                                        <div class="result-info"><strong>Age:</strong> @Model[i].Age</div>
+                                        <div class="result-info"><strong>Occupation:</strong> @Model[i].Occupation</div>
+                                        <div class="result-info"><strong>Commitment Type:</strong> @Model[i].CommitmentType</div>
+
+                                        <div class="result-description">
+                                            @Model[i].ProfileDescription
+                                        </div>
+
+                                        <a asp-controller="PublicProfile"
+                                               asp-action="Details"
+                                               asp-route-memberId="@Model[i].MemberID"
+                                               class="btn btn-main">
+                                            View Profile
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+
+                <div class="top-links">
+                    <a asp-controller="Search" asp-action="Index">New Search</a>
+                    <a asp-controller="Home" asp-action="Index">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

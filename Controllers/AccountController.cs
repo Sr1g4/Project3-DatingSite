@@ -13,7 +13,6 @@ namespace Project3_DatingSite.Controllers
     {
         public class AccountController : Controller
         {
-          
 
             [HttpPost]
             public IActionResult Login(LoginViewModel login)
@@ -40,7 +39,7 @@ namespace Project3_DatingSite.Controllers
                 acctToSend.Username = login.Username;
                 acctToSend.Password = SecurityHelper.HashPassword(login.Password);
 
-                string apiUrl = "http://localhost:5192/api/MembersService/Login";
+                string apiUrl = "http://localhost:7295/api/MembersService/Login";
 
                 HttpClient client = new HttpClient();
 
@@ -58,6 +57,12 @@ namespace Project3_DatingSite.Controllers
                 }
 
                 string json = response.Content.ReadAsStringAsync().Result;
+
+                if (json == null || json.Trim() == "")
+                {
+                    ViewData["Message"] = "Invalid username or password.";
+                    return View(login);
+                }
 
                 Account acctFound = JsonSerializer.Deserialize<Account>(json, new JsonSerializerOptions
                 {

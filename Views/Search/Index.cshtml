@@ -1,0 +1,172 @@
+﻿@model Project3_DatingSite.Models.SearchViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = null;
+    ViewData["Title"] = "MatchRight - Browse Profiles";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <style>
+            body {
+                background: linear-gradient(135deg, #f5e6d3, #e8d5b7);
+                min-height: 100vh;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .page-wrapper {
+                padding: 30px 15px;
+            }
+
+            .page-card {
+                max-width: 1050px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+                overflow: hidden;
+            }
+
+            .header-side {
+                background: linear-gradient(135deg, #1e90ff, #0066cc);
+                color: white;
+                padding: 35px 30px;
+                text-align: center;
+            }
+
+            .content-side {
+                padding: 35px 30px;
+                background-color: #fffdf8;
+            }
+
+            .form-title {
+                font-size: 30px;
+                font-weight: bold;
+                color: #0066cc;
+                margin-bottom: 10px;
+            }
+
+            .form-subtitle {
+                color: #666;
+                margin-bottom: 25px;
+            }
+
+            .form-control {
+                height: 46px;
+                border-radius: 10px;
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+
+                .form-control:focus {
+                    border-color: #1e90ff;
+                    box-shadow: 0 0 6px rgba(30, 144, 255, 0.3);
+                }
+
+            .btn-main {
+                background-color: #1e90ff;
+                border-color: #1e90ff;
+                color: white;
+                width: 100%;
+                height: 46px;
+                border-radius: 10px;
+                font-weight: bold;
+            }
+
+                .btn-main:hover {
+                    background-color: #0066cc;
+                    border-color: #0066cc;
+                    color: white;
+                }
+
+            .link-group {
+                margin-top: 20px;
+            }
+
+                .link-group a {
+                    color: #0066cc;
+                    font-weight: 600;
+                    text-decoration: none;
+                }
+
+                    .link-group a:hover {
+                        text-decoration: underline;
+                    }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="page-card">
+            <div class="header-side">
+                <div style="margin-bottom: 15px;">
+                    <img src="~/images/matchright-logo.png"
+                         alt="MatchRight Logo"
+                         style="max-width: 220px; width: 100%;" />
+                </div>
+
+                <h2>Browse Profiles</h2>
+                <p>Search for potential matches using filters that matter to you.</p>
+            </div>
+
+            <div class="content-side">
+                <div class="form-title">Find Your Match</div>
+                <div class="form-subtitle">Use one or more filters below to narrow your search.</div>
+
+                <form asp-controller="Search" asp-action="Index" method="POST">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label asp-for="City"></label>
+                            <input asp-for="City" class="form-control" placeholder="Enter city" />
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <label asp-for="State"></label>
+                            <input asp-for="State" class="form-control" placeholder="Enter state" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label asp-for="MinAge"></label>
+                            <input asp-for="MinAge" class="form-control" placeholder="Minimum age" />
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <label asp-for="MaxAge"></label>
+                            <input asp-for="MaxAge" class="form-control" placeholder="Maximum age" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CommitmentType"></label>
+                        <input asp-for="CommitmentType" class="form-control" placeholder="Examples: Dating, Long-Term, Marriage" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Keyword"></label>
+                        <input asp-for="Keyword" class="form-control" placeholder="Search by occupation, interest, or description keyword" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Search Profiles" class="btn btn-main" />
+                    </div>
+                </form>
+
+                <div class="link-group">
+                    <a asp-controller="Home" asp-action="Index">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

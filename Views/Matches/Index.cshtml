@@ -1,0 +1,64 @@
+﻿@model List<Project3_DatingSite.Models.MatchViewModel>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = null;
+    ViewData["Title"] = "MatchRight - My Matches";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <style>
+        body { background: linear-gradient(135deg, #f5e6d3, #e8d5b7); min-height: 100vh; font-family: Arial, Helvetica, sans-serif; }
+        .page-wrapper { padding: 30px 15px; }
+        .page-card { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); overflow: hidden; }
+        .header-side { background: linear-gradient(135deg, #1e90ff, #0066cc); color: white; padding: 35px 30px; text-align: center; }
+        .content-side { padding: 30px; background-color: #fffdf8; }
+        .item-card { background: white; border: 1px solid #e6e6e6; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 25px; }
+        .item-photo { width: 100%; height: 240px; object-fit: cover; }
+        .item-body { padding: 18px; }
+        .item-name { font-size: 22px; font-weight: bold; color: #0066cc; margin-bottom: 10px; }
+        .top-links { margin-top: 20px; text-align: center; }
+        .top-links a { color: #0066cc; font-weight: bold; text-decoration: none; margin: 0 10px; }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="page-card">
+        <div class="header-side">
+            <img src="~/images/matchright-logo.png" alt="MatchRight Logo" style="max-width:220px; width:100%; margin-bottom:15px;" />
+            <h2>My Matches</h2>
+            <p>Mutual matches ready for connection.</p>
+        </div>
+
+        <div class="content-side">
+            <div class="row">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="col-sm-6">
+                        <div class="item-card">
+                            <img src="@Model[i].PhotoURL" alt="Profile Photo" class="item-photo" />
+                            <div class="item-body">
+                                <div class="item-name">@Model[i].FirstName @Model[i].LastName</div>
+                                <div><strong>Location:</strong> @Model[i].City, @Model[i].State</div>
+                                <div><strong>Occupation:</strong> @Model[i].Occupation</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="top-links">
+                <a asp-controller="Home" asp-action="Index">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
