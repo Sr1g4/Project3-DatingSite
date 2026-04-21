@@ -3,7 +3,8 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
     ViewData["Title"] = "MatchRight - Search Results";
 }
 
@@ -45,7 +46,7 @@
             }
 
             .content-side {
-                padding: 30px;
+                padding: 24px;
                 background-color: #fffdf8;
             }
 
@@ -55,44 +56,64 @@
                 border-radius: 16px;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.08);
                 overflow: hidden;
-                margin-bottom: 25px;
+                margin-bottom: 18px;
+                transition: transform 0.15s ease, box-shadow 0.15s ease;
+                height: 100%;
             }
+
+                .result-card:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+                }
 
             .result-photo {
                 width: 100%;
-                height: 260px;
+                height: 180px;
                 object-fit: cover;
                 background-color: #f2f2f2;
+                display: block;
             }
 
             .result-body {
-                padding: 20px;
+                padding: 12px 14px 14px 14px;
             }
 
             .result-name {
-                font-size: 24px;
+                font-size: 16px;
                 font-weight: bold;
                 color: #0066cc;
-                margin-bottom: 10px;
+                margin-bottom: 6px;
+                line-height: 1.2;
             }
 
             .result-info {
-                margin-bottom: 8px;
+                margin-bottom: 4px;
                 color: #444;
+                font-size: 12px;
+                line-height: 1.35;
             }
 
             .result-description {
-                margin-top: 12px;
+                margin-top: 8px;
                 color: #666;
+                font-size: 12px;
+                line-height: 1.4;
+                min-height: 50px;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
             }
 
             .btn-main {
                 background-color: #1e90ff;
                 border-color: #1e90ff;
                 color: white;
-                border-radius: 10px;
+                border-radius: 8px;
                 font-weight: bold;
-                margin-top: 15px;
+                margin-top: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
             }
 
                 .btn-main:hover {
@@ -109,7 +130,7 @@
             }
 
             .top-links {
-                margin-top: 20px;
+                margin-top: 10px;
                 text-align: center;
             }
 
@@ -123,6 +144,16 @@
                     .top-links a:hover {
                         text-decoration: underline;
                     }
+
+            @@media (max-width: 767px) {
+                .content-side {
+                    padding: 16px;
+                }
+
+                .result-photo {
+                    height: 160px;
+                }
+            }
     </style>
 </head>
 <body>
@@ -140,6 +171,13 @@
             </div>
 
             <div class="content-side">
+                @if (ViewData["Message"] != null)
+                {
+                    <div class="no-results" style="padding-bottom:20px;">
+                        @ViewData["Message"]
+                    </div>
+                }
+
                 @if (Model == null || Model.Count == 0)
                 {
                     <div class="no-results">
@@ -148,10 +186,10 @@
                 }
                 else
                 {
-                    <div class="row">
+                    <div class="row" style="margin-left:-8px; margin-right:-8px;">
                         @for (int i = 0; i < Model.Count; i++)
                         {
-                            <div class="col-sm-6">
+                            <div class="col-md-4 col-sm-6" style="padding:8px;">
                                 <div class="result-card">
                                     <img src="@Model[i].PhotoURL" alt="Profile Photo" class="result-photo" />
 

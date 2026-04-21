@@ -1,149 +1,200 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
-@{
-    Layout = null;
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "MatchRight - Home";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>@ViewData["Title"]</title>
+<style>
+    .home-wrapper {
+        max-width: 1200px;
+        margin: 10px auto 0 auto;
+    }
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    .hero-card {
+        background: white;
+        border-radius: 22px;
+        box-shadow: 0 14px 40px rgba(0,0,0,0.16);
+        overflow: hidden;
+    }
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    .hero-top {
+        background: linear-gradient(135deg, #1e90ff, #0066cc);
+        color: white;
+        padding: 45px 40px 35px 40px;
+    }
 
-    <style>
-            body {
-                background: linear-gradient(135deg, #f5e6d3, #e8d5b7);
-                min-height: 100vh;
-                font-family: Arial, Helvetica, sans-serif;
+    .hero-logo {
+        max-width: 220px;
+        width: 100%;
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+
+    .hero-photo {
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid white;
+        display: block;
+        margin: 0 auto 18px auto;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.20);
+    }
+
+    .hero-title {
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+        text-align: center;
+        font-size: 18px;
+        opacity: 0.95;
+    }
+
+    .hero-bottom {
+        background-color: #fffdf8;
+        padding: 35px 35px 25px 35px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0066cc;
+        margin-bottom: 20px;
+    }
+
+    .quick-card {
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 16px;
+        padding: 22px 18px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        text-align: center;
+        margin-bottom: 18px;
+        min-height: 150px;
+    }
+
+    .quick-card-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #0066cc;
+        margin-bottom: 8px;
+    }
+
+    .quick-card-text {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .quick-btn {
+        background-color: #1e90ff;
+        border-color: #1e90ff;
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 8px 14px;
+    }
+
+        .quick-btn:hover {
+            background-color: #0066cc;
+            border-color: #0066cc;
+            color: white;
+        }
+
+    @@media (max-width: 767px) {
+        .hero-title {
+            font-size: 30px;
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+        }
+
+        .hero-top {
+            padding: 30px 20px 25px 20px;
+        }
+
+        .hero-bottom {
+            padding: 25px 20px 15px 20px;
+        }
+    }
+</style>
+
+<div class="home-wrapper">
+    <div class="hero-card">
+        <div class="hero-top">
+            <img src="~/images/matchright-logo.png" alt="MatchRight Logo" class="hero-logo" />
+
+            @if (ViewData["PhotoURL"] != null && ViewData["PhotoURL"].ToString() != "")
+            {
+                <img src="@ViewData["PhotoURL"]" alt="Profile Picture" class="hero-photo" />
             }
 
-            .page-wrapper {
-                padding: 40px 15px;
-            }
-
-            .dashboard-card {
-                max-width: 980px;
-                margin: 0 auto;
-                background: white;
-                border-radius: 16px;
-                box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-                overflow: hidden;
-            }
-
-            .header-side {
-                background: linear-gradient(135deg, #1e90ff, #0066cc);
-                color: white;
-                padding: 30px;
-                text-align: center;
-            }
-
-            .content-side {
-                padding: 30px;
-                background-color: #fffdf8;
-            }
-
-            .welcome-text {
-                font-size: 28px;
-                font-weight: bold;
-                margin-bottom: 10px;
-            }
-
-            .action-links a {
-                display: block;
-                margin-bottom: 14px;
-                padding: 13px;
-                background-color: #1e90ff;
-                color: white;
-                text-align: center;
-                border-radius: 10px;
-                font-weight: bold;
-                text-decoration: none;
-            }
-
-                .action-links a:hover {
-                    background-color: #0066cc;
-                }
-
-            .logout-link {
-                margin-top: 20px;
-                text-align: center;
-            }
-
-                .logout-link a {
-                    color: #0066cc;
-                    font-weight: bold;
-                    text-decoration: none;
-                }
-
-                    .logout-link a:hover {
-                        text-decoration: underline;
-                    }
-
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-                object-fit: cover;
-                border-radius: 50%;
-                border: 4px solid white;
-                margin-top: 15px;
-            }
-
-            .dashboard-subtitle {
-                margin-top: 5px;
-                font-size: 16px;
-            }
-    </style>
-</head>
-<body>
-    <div class="page-wrapper">
-        <div class="dashboard-card">
-            <div class="header-side">
-                <div style="margin-bottom: 15px;">
-                    <img src="~/images/matchright-logo.png"
-                         alt="MatchRight Logo"
-                         style="max-width:200px; width:100%;" />
-                </div>
-
-                @if (ViewData["PhotoURL"] != null && ViewData["PhotoURL"].ToString() != "")
-                {
-                    <div>
-                        <img src="@ViewData["PhotoURL"]" alt="Profile Picture" class="profile-photo" />
-                    </div>
-                }
-
-                <div class="welcome-text">
-                    Welcome, @Context.Session.GetString("FirstName")!
-                </div>
-
-                <div class="dashboard-subtitle">Your MatchRight dashboard</div>
+            <div class="hero-title">
+                Welcome, @Context.Session.GetString("FirstName")!
             </div>
 
-            <div class="content-side">
-                <div class="action-links">
-                    @if (ViewData["HasProfile"] != null && (bool)ViewData["HasProfile"] == true)
-                    {
-                        <a asp-controller="Profile" asp-action="ViewProfile">View Profile</a>
-                        <a asp-controller="Profile" asp-action="EditProfile">Edit Profile</a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Profile" asp-action="CreateProfile">Create Profile</a>
-                    }
+            <div class="hero-subtitle">
+                Your MatchRight dashboard for browsing, connecting, and planning meaningful dates.
+            </div>
+        </div>
 
-                    <a asp-controller="Search" asp-action="Index">Browse Profiles</a>
-                    <a asp-controller="Likes" asp-action="Sent">My Likes</a>
-                    <a asp-controller="Likes" asp-action="Received">People Who Liked Me</a>
-                    <a asp-controller="Matches" asp-action="Index">My Matches</a>
-                    <a asp-controller="DateRequests" asp-action="Index">Date Requests</a>
-                    <a asp-controller="DatePlans" asp-action="Index">Date Plans</a>
+        <div class="hero-bottom">
+            <div class="section-title">Quick Actions</div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="quick-card">
+                        <div class="quick-card-title">Browse Profiles</div>
+                        <div class="quick-card-text">Search for potential matches based on age, location, commitment type, and interests.</div>
+                        <a asp-controller="Search" asp-action="Index" class="btn quick-btn">Browse Now</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="quick-card">
+                        <div class="quick-card-title">My Profile</div>
+                        <div class="quick-card-text">View your full profile details and see how your profile appears inside MatchRight.</div>
+                        <a asp-controller="Profile" asp-action="ViewProfile" class="btn quick-btn">View Profile</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="quick-card">
+                        <div class="quick-card-title">Edit Profile</div>
+                        <div class="quick-card-text">Update your profile description, photo, contact information, and dating preferences.</div>
+                        <a asp-controller="Profile" asp-action="EditProfile" class="btn quick-btn">Edit Profile</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="quick-card">
+                        <div class="quick-card-title">My Likes</div>
+                        <div class="quick-card-text">See the profiles you have liked and keep track of your outgoing interest.</div>
+                        <a asp-controller="Likes" asp-action="Sent" class="btn quick-btn">View Likes</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="quick-card">
+                        <div class="quick-card-title">People Who Liked Me</div>
+                        <div class="quick-card-text">Check who has already shown interest in your profile.</div>
+                        <a asp-controller="Likes" asp-action="Received" class="btn quick-btn">See Who Liked Me</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="quick-card">
+                        <div class="quick-card-title">Date Requests</div>
+                        <div class="quick-card-text">Review incoming and outgoing date invitations and manage next steps.</div>
+                        <a asp-controller="DateRequests" asp-action="Index" class="btn quick-btn">Open Requests</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>

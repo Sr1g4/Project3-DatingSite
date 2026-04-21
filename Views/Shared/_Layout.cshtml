@@ -1,0 +1,127 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var firstName = Context.Session.GetString("FirstName");
+    var username = Context.Session.GetString("Username");
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MatchRight</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <style>
+            body {
+                margin: 0;
+                background: linear-gradient(135deg, #f5e6d3, #e8d5b7);
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .navbar-custom {
+                background: linear-gradient(135deg, #1e90ff, #0066cc);
+                border: none;
+                border-radius: 0;
+                margin-bottom: 0;
+                min-height: 68px;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            }
+
+                .navbar-custom .navbar-brand {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 24px;
+                    padding-top: 22px;
+                    padding-bottom: 22px;
+                }
+
+                .navbar-custom .navbar-nav > li > a {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 15px;
+                    padding-top: 24px;
+                    padding-bottom: 24px;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+
+                .navbar-custom .navbar-text {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 14px;
+                    padding-top: 10px;
+                }
+
+                .navbar-custom .navbar-nav > li > a:hover,
+                .navbar-custom .navbar-nav > li > a:focus {
+                    background-color: #0057ad;
+                    color: white;
+                }
+
+            .main-container {
+                padding: 35px 20px;
+            }
+
+            @@media (max-width: 991px) {
+                .navbar-custom .navbar-brand {
+                    font-size: 20px;
+                }
+
+                .navbar-custom .navbar-nav > li > a {
+                    font-size: 13px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-custom">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    MatchRight
+                </a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Search" asp-action="Index">Browse Profiles</a></li>
+                <li><a asp-controller="Likes" asp-action="Sent">My Likes</a></li>
+                <li><a asp-controller="Likes" asp-action="Received">Liked Me</a></li>
+                <li><a asp-controller="Matches" asp-action="Index">Matches</a></li>
+                <li><a asp-controller="DateRequests" asp-action="Index">Date Requests</a></li>
+                <li><a asp-controller="Profile" asp-action="ViewProfile">My Profile</a></li>
+                <li><a asp-controller="Profile" asp-action="EditProfile">Edit Profile</a></li>
+            </ul>
+
+            <<ul class="nav navbar-nav navbar-right">
+                @if (firstName != null && firstName != "")
+                {
+                    <li class="navbar-text">Welcome, @firstName</li>
+                }
+                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+            </ul>
+
+                <li>
+                    <a asp-controller="Account" asp-action="Logout">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="main-container">
+        @RenderBody()
+    </div>
+
+</body>
+</html>

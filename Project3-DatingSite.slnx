@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../../../Downloads/SearchAPI/SearchAPI/SearchAPI.csproj" />
   <Project Path="../DatingSiteLibrary/DatingSiteLibrary.csproj" Id="62628bc6-99c7-47ed-9944-f2308289fe30" />
   <Project Path="../ProfilesAPI/DatingProfilesAPI.csproj" Id="3daea0bb-b585-4930-958a-e3854dc279fb" />
   <Project Path="Project3-DatingSite.csproj" />
